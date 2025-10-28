@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Principal Realtime WS Client</title>
+  <style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;margin:24px}#log{height:50vh;background:#111;color:#0f0;padding:12px;overflow:auto;white-space:pre-wrap}</style>
+</head>
+<body>
+  <h1>Principal Realtime — WebSocket Client</h1>
+  <p>Connects to ws://localhost:8080/ws</p>
+  <input id="url" size="60" value="ws://localhost:8080/ws"/>
+  <button id="connect">Connect</button>
+  <button id="send">Send ping</button>
+  <pre id="log"></pre>
+<script>
+let ws;const log=document.getElementById('log');function L(m){log.textContent+=new Date().toISOString()+" "+m+"\n";log.scrollTop=log.scrollHeight}
+connect.onclick=()=>{if(ws)ws.close();ws=new WebSocket(url.value);ws.onopen=()=>L('connected');ws.onmessage=e=>L('recv: '+e.data);ws.onclose=()=>L('closed');ws.onerror=e=>L('error')}
+send.onclick=()=>{if(ws&&ws.readyState===WebSocket.OPEN)ws.send('ping')}
+</script>
+</body>
+</html>

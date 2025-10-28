@@ -1,0 +1,1 @@
+Write-Host 'Use project wrapper: backend/bootstrap-wrapper.bat; backend/gradlew -v'
